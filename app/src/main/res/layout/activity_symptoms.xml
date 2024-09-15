@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".SymptomsActivity">
+
+    <!-- Symptoms List with RatingBars -->
+    <TextView
+        android:id="@+id/textViewSymptoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate your symptoms (1-5)"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutSymptoms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textViewSymptoms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Symptom 1: Nausea -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nausea"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingNausea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <!-- Symptom 2: Headache -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Headache"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingHeadache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <!-- Symptom 3: Diarrhea -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diarrhea"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingDiarrhea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <!-- Add other symptoms similarly -->
+        <!-- Symptom 4: Sore Throat -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sore Throat"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingSoreThroat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <!-- Symptom 5: Fever -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fever"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingFever"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cough"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingCough"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Muscle Ache"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingMuscleAche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Feeling Tired"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingFeelingTired"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Loss of Smell or Taste"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/ratingLossSmellTaste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+<!--        shortnessOfBreath-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Shortness of Breath"
+                android:textSize="16sp"
+                android:layout_weight="1" />
+            <RatingBar
+                android:id="@+id/shortnessOfBreath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Upload Symptoms Button -->
+    <Button
+        android:id="@+id/buttonUploadSymptoms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Symptoms"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
