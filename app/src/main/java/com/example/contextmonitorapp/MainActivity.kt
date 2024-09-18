@@ -38,7 +38,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import androidx.lifecycle.lifecycleScope
-//import com.google.android.filament.View
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,6 +65,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
+
     private lateinit var cameraExecutor: ExecutorService
     private var videoCapture: VideoCapture<Recorder>? = null  // VideoCapture for video recording
 //    private var isRecording = false
@@ -91,11 +91,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
-//        binding.buttonSave.setOnClickListener {
-//            Toast.makeText(this, "Respiratory Rate saved!", Toast.LENGTH_SHORT).show()
-//        }
-
-//        binding.buttonSave.setOnClickListener { onSaveButtonClick() }
 
         // heart rate
         enableEdgeToEdge()
@@ -133,14 +128,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
 
     }
-
+//    test function
     override fun onSensorChanged(event: SensorEvent) {
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             accelValuesX.add(event.values[0])
             accelValuesY.add(event.values[1])
             accelValuesZ.add(event.values[2])
-
-
         }
     }
 
@@ -204,7 +197,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }, ContextCompat.getMainExecutor(this))
     }
-//    private lateinit var cameraControl: CameraControl
 
     private fun bindPreview(cameraProvider: ProcessCameraProvider) {
         val preview: Preview = Preview.Builder().build()
@@ -231,8 +223,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun startVideoRecording() {
         val videoCapture = this.videoCapture ?: return
 
-        // Ensure there is no active recording
-//        val curRecording = recording
+
         if (activeRecording != null) {
             Log.e("MainActivity", "A recording is already in progress.")
 
@@ -252,16 +243,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // Enable flash
         cameraControl.enableTorch(true)
 
-        // Create a file for saving the recording
-        val videoFile = File(getExternalFilesDir(null), "heart_rate_video.mp4")
         val outputOptions = MediaStoreOutputOptions
             .Builder(contentResolver, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
             .setContentValues(contentValues)
             .build()
 
         // Start the recording
-
-
         activeRecording = videoCapture.output
             .prepareRecording(this, outputOptions)
             .apply {
@@ -285,14 +272,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
 
                         if (!recordEvent.hasError()) {
-                            // Print the URI to the log
-                            val uri = recordEvent.outputResults.outputUri
-//                            val path = getRealPathFromURI(uri) // Function to convert URI to actual file path
+
                             binding.textViewStatus.text = "Calculating..."
                             lifecycleScope.launch {
 
                                 heartRate = heartRateCalculator(recordEvent.outputResults.outputUri, contentResolver)
-                                binding.textViewStatus.text = "Heart Rate: $heartRate"
+                                binding.textViewStatus.text = "Heart Rate: $heartRate bpm"
 
                             }
                         } else {
@@ -333,18 +318,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         countdownTimer?.cancel() // Cancel the timer if recording is manually stopped
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun calculateHeartRate(uri: Uri) {
-        lifecycleScope.launch {
-            val heartRate = heartRateCalculator(uri, contentResolver)
-            binding.textViewHeartRate.text = "Heart Rate: $heartRate bpm"
-        }
-    }
-
-//    private fun onSaveButtonClick() {
-//        // Handle save button click
-//        Toast.makeText(this, "Recording saved!", Toast.LENGTH_SHORT).show()
-//    }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
@@ -387,11 +360,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             val path = cursor?.getString(columnIndex ?: 0)
             cursor?.close()
 
-            val sdCardPath = path?.replace("/storage/emulated/0", "/sdcard")
-//            val path = getRealPathFromURI(uri)
 
-            Log.d("HeartRateCalculator", "EXTRACTED SDCARD Video Path: $sdCardPath")
-            Log.d("HeartRateCalculator", "EXTRACTED Video Path: $path")
 
             val retriever = MediaMetadataRetriever()
             val frameList = ArrayList<Bitmap>()
@@ -417,7 +386,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 retriever.release()
                 if (frameList.isEmpty()) {
                     Log.e("MainActivity", "No frames extracted from the video.")
-                    return@withContext 0 // Return 0 or any default value if no frames are extracted
+                    return@withContext 0 // Return 0
                 }
                 var redBucket: Long
                 var pixelCount: Long = 0
